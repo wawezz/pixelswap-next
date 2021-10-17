@@ -1,0 +1,45 @@
+@import './variables.less';
+
+html,
+body {
+  width: 100%;
+}
+
+html {
+  text-size-adjust: 100%;
+}
+
+html,
+body,
+#root,
+#__next,
+.app {
+  height: 100%;
+}
+
+// custom styles
+#default-layout {
+  .ant-menu-item-group-title {
+    display: none !important;
+  }
+  .ant-menu-item {
+    &.ant-menu-item-selected {
+      .ant-menu-item-icon {
+        color: @white;
+      }
+    }
+    .ant-menu-item-icon {
+      color: @divider-color;
+    }
+
+    &:hover {
+      background-color: @hover-color!important;
+    }
+  }
+  .btn-header-circle{
+    &:hover {
+      background-color: @secondary-background-color_lighten;
+      color: @text-color;
+    }
+  }
+}

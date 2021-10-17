@@ -1,0 +1,53 @@
+@import '~antd/lib/style/themes/default.less';
+
+//
+// PROJECT
+// -----------------------------------------
+// https://lesscss.org/#escaping
+@THEME--DARK: ~'theme-dark';
+
+@primary-color: #a62cff;
+@secondary-color: #20c997;
+@secondary-background-color: #001a32;
+@secondary-background-color_lighten: #192f49;
+@divider-color: #5b5a99;
+@hover-color: #14263a;
+@text-color: #ffffff;
+@overlay-color: #212121;
+@border-radius-base: 8px;
+@font-size-base: 16px;
+@font-size-small: 12px;
+
+// Font
+@font-family: 'Chinese Quote', 'Segoe UI', Roboto, -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+  'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+// Layout
+@layout-body-background: #001529;
+
+// Buttons
+@btn-border-radius-base: 4px;
+@btn-border-radius-sm: 4px;
+@btn-border-radius-pill: 999px!important;
+@btn-padding-horizontal-sm: 13px;
+@btn-height-sm: 28px;
+@btn-font-size-sm: @font-size-small;
+@btn-icon-marge-right-sm: 4px!important;
+
+// Progress
+@progress-default-color: @primary-color;
+@progress-remaining-color: #341d69;
+@progress-radius: 0;
+
+// Card
+@card-radius: 24px;
+
+:export {
+  primary-color: @primary-color;
+  secondary-color: @secondary-color;
+  divider-color: @divider-color;
+  overlay-color: @overlay-color;
+  border-radius-base: @border-radius-base;
+  secondary-background-color: @secondary-background-color;
+  secondary-background-color_lighten: @secondary-background-color_lighten;
+}
