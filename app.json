@@ -1,6 +1,0 @@
-{
-    "name": "Pixelswap Demo",
-    "description": "Pixelswap frontend",
-    "repository": "https://github.com/wawezz/pixelswap-next",
-    "keywords": ["node", "next"]
-  }
