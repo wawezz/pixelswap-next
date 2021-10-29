@@ -75,8 +75,8 @@ export default function Dashboard(): JSX.Element {
 
   return (
     <div>
-      <Row>
-        <Col xs={24} md={12} className="p-3">
+      <Row gutter={[24, 24]}>
+        <Col xs={24} md={12}>
           <Card bordered={false} className="block" style={{ backgroundColor: styles['secondary-background-color'] }}>
             <ResponsiveContainer width="100%" height={chartHeight}>
               <ComposedChart data={dataTvl}>
@@ -88,7 +88,7 @@ export default function Dashboard(): JSX.Element {
             </ResponsiveContainer>
           </Card>
         </Col>
-        <Col xs={24} md={12} className="p-3">
+        <Col xs={24} md={12}>
           <Card bordered={false} className="block" style={{ backgroundColor: styles['secondary-background-color'] }}>
             <ResponsiveContainer width="100%" height={chartHeight}>
               <ComposedChart data={dataVolume}>

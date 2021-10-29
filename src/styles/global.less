@@ -17,6 +17,18 @@ body,
   height: 100%;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
 // custom styles
 #default-layout {
   .ant-menu-item-group-title {
@@ -32,14 +44,68 @@ body,
       color: @divider-color;
     }
 
+    .ant-menu-title-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
     &:hover {
       background-color: @hover-color!important;
     }
   }
-  .btn-header-circle{
+  .btn-header-circle {
     &:hover {
       background-color: @secondary-background-color_lighten;
       color: @text-color;
     }
+  }
+
+  .select-dark {
+    .ant-select-selector {
+      background-color: @layout-body-background!important;
+      border: none;
+      box-shadow: none;
+    }
+    .ant-select-arrow {
+      color: @white;
+    }
+  }
+
+  .ant-input{
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.ant-tabs-dropdown-menu,
+.ant-select-dropdown {
+  border: 1px solid;
+  background-color: @layout-body-background!important;
+  padding: 0 !important;
+
+  .ant-tabs-dropdown-menu-item {
+    border-radius: @border-radius-base;
+    &:hover {
+      background-color: @secondary-background-color_lighten;
+    }
+  }
+
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    &:hover {
+      background-color: @secondary-background-color_lighten;
+    }
+  }
+
+  .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: @secondary-background-color_lighten;
+  }
+
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    background-color: @primary-color;
+  }
+
+  .ant-empty-description {
+    color: @white;
   }
 }

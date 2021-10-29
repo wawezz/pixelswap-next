@@ -16,6 +16,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined'
 export type MenuItem = MenuItemProps & {
   to: string
   key: string
+  mark?: string
 }
 
 export const menuItems: MenuItem[][] = [
@@ -36,7 +37,8 @@ export const menuItems: MenuItem[][] = [
       icon: <SwapHorizOutlinedIcon className="mr-6 text-2xl" />,
       title: 'Swap',
       to: '/swap',
-      key: 'swap'
+      key: 'swap',
+      mark: 'Testnet'
     },
     {
       icon: <FlashOnOutlinedIcon className="mr-6 text-2xl" />,

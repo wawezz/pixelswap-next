@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Divider, Layout, Menu, Space, Tooltip } from 'antd'
+import { Button, Divider, Input, Layout, Menu, Space, Tooltip } from 'antd'
 import styles from '@/styles/exports.module.less'
 import { MenuUnfoldOutlined, MenuFoldOutlined, SearchOutlined, AppstoreOutlined } from '@ant-design/icons'
 import BookmarkIcon from '@mui/icons-material/Bookmark'
@@ -26,10 +26,25 @@ export const DefaultLayout: React.FC<IProps> = (props): JSX.Element => {
   const { active, account, activate, deactivate } = useWeb3React()
   const router = useRouter()
   const screens = useBreakpoint()
-  const [collapsed, setCollapsed] = useState(true)
+  const [collapsed, setCollapsed] = useState<boolean>(true)
+  const [searchActive, setSearchActive] = useState<boolean>(false)
+  const searchRow = useRef<HTMLDivElement>(null)
 
   const menuWidth = '272px'
   const headerHeight = '64px'
+
+  useEffect(() => {
+    if (!searchActive) return
+
+    function handleClick(event: Event) {
+      if (searchRow.current && !searchRow.current.contains(event.target as Node)) {
+        setSearchActive(false)
+      }
+    }
+    window.addEventListener('click', handleClick)
+    // clean up
+    return () => window.removeEventListener('click', handleClick)
+  }, [searchActive])
 
   useEffect(() => {
     setCollapsed(!screens.xl)
@@ -89,7 +104,12 @@ export const DefaultLayout: React.FC<IProps> = (props): JSX.Element => {
                     onClick={() => {
                       router.push(item.to)
                     }}>
-                    {item.title}
+                    <span>{item.title}</span>
+                    {item.mark && (
+                      <span className="text-xs py-1 px-2 ml-1 rounded-lg" style={{ backgroundColor: styles['secondary-color'] }}>
+                        {item.mark}
+                      </span>
+                    )}
                   </Menu.Item>
                 ))}
                 <Menu.Divider className="my-3" style={{ backgroundColor: styles['divider-color'] }} />
@@ -123,24 +143,44 @@ export const DefaultLayout: React.FC<IProps> = (props): JSX.Element => {
             className="border-none btn-header-circle"
           />
           <Space size="small">
-            <Button type="ghost" shape="circle" icon={<SearchOutlined />} size="large" className="border-none btn-header-circle" />
+            <div className="flex items-center" ref={searchRow}>
+              <Button
+                type="ghost"
+                shape="circle"
+                icon={<SearchOutlined />}
+                size="large"
+                onClick={() => {
+                  if (searchActive) {
+                    console.log('text')
+                  } else {
+                    setSearchActive(true)
+                  }
+                }}
+                className={`border-none btn-header-circle z-10 transition-colors duration-300 ${searchActive ? '-mr-10' : ''}`}
+              />
+              {searchActive && <Input style={{ backgroundColor: styles['divider-color'] }} className="rounded-2xl h-8 pl-11" />}
+            </div>
             <Button type="ghost" shape="circle" icon={<AppstoreOutlined />} size="large" className="border-none btn-header-circle" />
-            <Button
-              type="primary"
-              shape="round"
-              icon={<img alt="pixelswap-icon" src="/img/pixel-icon.png" className="mr-0 mt-2 sm:mr-1" />}
-              size="small"
-              className="flex items-center justify-center leading-none text-xs transition-colors duration-300">
-              $ 0,04
-            </Button>
-            <Button
-              type="primary"
-              icon={<BookmarkIcon fontSize="small" className="mr-0 sm:mr-1" />}
-              size="small"
-              shape={screens.sm ? 'round' : 'circle'}
-              className="flex items-center justify-center leading-none text-xs transition-colors duration-300">
-              <div className="hidden sm:block">Airdrop</div>
-            </Button>
+            {(!searchActive || (searchActive && screens.md)) && (
+              <>
+                <Button
+                  type="primary"
+                  shape="round"
+                  icon={<img alt="pixelswap-icon" src="/img/pixel-icon.png" className="mr-0 mt-2 sm:mr-1" />}
+                  size="small"
+                  className="flex items-center justify-center leading-none text-xs transition-colors duration-300">
+                  $ 0,04
+                </Button>
+                <Button
+                  type="primary"
+                  icon={<BookmarkIcon fontSize="small" className="mr-0 sm:mr-1" />}
+                  size="small"
+                  shape={screens.sm ? 'round' : 'circle'}
+                  className="flex items-center justify-center leading-none text-xs transition-colors duration-300">
+                  <div className="hidden sm:block">Airdrop</div>
+                </Button>
+              </>
+            )}
             {active ? (
               <Tooltip title={account}>
                 <span>{account?.substring(0, 4) + '...'}</span>
